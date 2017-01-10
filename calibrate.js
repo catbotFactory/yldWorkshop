@@ -18,8 +18,8 @@ const blue = chalk.cyan
 const catDef = {
   isHWTested: false,
   inverted: {
-    X: false,
-    Y: false
+    X: true,
+    Y: true
   },
   hw: {
     laser: {
@@ -73,6 +73,25 @@ function testLaser (lzr, cb) {
   }, 3000)
 }
 
+const servoCenterPrompt = {
+  type: 'confirm',
+  name: 'areServosCentered',
+  message: 'Are the servo correctly centred now?'
+}
+
+function centerServos (servoX, servoY, laser, cb) {
+  console.log(blue('servos are now aligned at a 90° angle, place the base and the laser so the lazer point in front of you'))
+  laser.on()
+  servoX.to(90)
+  servoY.to(90)
+  inc.prompt([servoCenterPrompt]).then(function (answers) {
+    debug(answers)
+    if (answers.areServosCentered !== true) {
+      centerServos(servoX, servoY, laser, cb)
+    } else (cb(null, {servoBitsCentered: true}))
+  })
+}
+
 // test servo
 const servoPrompt = {
   type: 'confirm',
@@ -80,9 +99,10 @@ const servoPrompt = {
   message: 'did the servo swept ?'
 }
 
+
 function testServo (servo, name, cb) {
   setTimeout(function () {
-    console.log(blue('end centering sweeping', name))
+    console.log(blue('test sweep', name))
     servo.sweep()
 
     setTimeout(function () {
@@ -162,7 +182,9 @@ function testInvert (servo, axe, side, angle, cb) {
     debug(a)
     if (a.is45 === true) {
       debug(`axe ${axe} isInverted: ${catConf.inverted[axe]}`)
-      if (cb) cb(null, {horizontal: true})
+      const obj = {}
+      obj[axe] = true
+      if (cb) cb(null, obj)
     } else {
       // invert axe and test
       catConf.inverted[axe] = true
@@ -182,6 +204,9 @@ function catBoard () {
   
   if (catConf.isHWTested !== true) {
     async.series([
+      function (cb) {
+        centerServos(servoX, servoY, led, cb)
+      },
       function (cb) {
         testLaser(led, cb)
       },
