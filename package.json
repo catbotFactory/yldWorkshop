@@ -17,6 +17,7 @@
     "debug": "^2.6.0",
     "firmata": "^0.14.1",
     "fs-extra": "^1.0.0",
+    "gamepad": "^1.4.2",
     "inquirer": "^2.0.0",
     "johnny-five": "^0.10.6",
     "rc": "^1.1.6",
