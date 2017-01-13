@@ -15,6 +15,7 @@ const red = chalk.red
 const blue = chalk.cyan
 
 // default catbot config
+
 const catDef = {
   isHWTested: false,
   inverted: {
@@ -26,12 +27,23 @@ const catDef = {
       pin: 12
     },
     servoX: {
-      pin: 10
+      pin: 10,
+      inverted: true
     },
     servoY: {
-      pin: 11
+      pin: 11,
+      inverted: true
+    },
+    jstk: {
+      x: 'A0',
+      y: 'A1',
+      pin: 9,
+      isPullup: true,
+      deadZone: 0.05
     }
-  }
+  },
+  hwJstk: false,
+  isDefaultConfig: false
 }
 
 // check for existing conf and merge them
@@ -98,7 +110,6 @@ const servoPrompt = {
   name: 'didServoSweep',
   message: 'did the servo swept ?'
 }
-
 
 function testServo (servo, name, cb) {
   setTimeout(function () {
@@ -177,7 +188,7 @@ function testInvert (servo, axe, side, angle, cb) {
   inc.prompt({
     type: 'confirm',
     name: 'is45',
-    message: `did the turret movet to the ${side}?`
+    message: `did the turret moved to the ${side}?`
   }).then(function (a) {
     debug(a)
     if (a.is45 === true) {
@@ -196,12 +207,12 @@ function testInvert (servo, axe, side, angle, cb) {
 // create the catboard instance
 function catBoard () {
   const hw = catConf.hw
-  var led = new five.Led(hw.laser.pin)
-  var servoX = new five.Servo(hw.servoX.pin)
-  var servoY = new five.Servo(hw.servoY.pin)
+  const led = new five.Led(hw.laser.pin)
+  const servoX = new five.Servo(hw.servoX.pin)
+  const servoY = new five.Servo(hw.servoY.pin)
   servoX.to(90)
   servoY.to(90)
-  
+
   if (catConf.isHWTested !== true) {
     async.series([
       function (cb) {
