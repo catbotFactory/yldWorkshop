@@ -17,6 +17,7 @@ const blue = chalk.cyan
 // default catbot config
 
 const catDef = {
+  hwJstk: true,
   isHWTested: false,
   inverted: {
     X: true,
@@ -42,7 +43,6 @@ const catDef = {
       deadZone: 0.05
     }
   },
-  hwJstk: false,
   isDefaultConfig: false
 }
 
@@ -164,7 +164,8 @@ function testInvAxes (servoX, servoY) {
       const conf = {
         isHWTested: catConf.isHWTested,
         inverted: catConf.inverted,
-        hw: catConf.hw
+        hw: catConf.hw,
+        hwJstk: true
       }
       fs.writeJsonSync(path.join(homeDir, '.catbotrc'), conf)
       process.exit()
@@ -240,6 +241,7 @@ function catBoard () {
         testInvAxes(servoX, servoY)
       })
   } else {
+    console.log(blue('catbot conf file found re-running servo calibration, if you want the full setup run "rm ~/.catbotrc" in a terminal'))
     testInvAxes(servoX, servoY)
   }
 }

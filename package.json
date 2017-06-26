@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint *.js",
-    "firmTest": "node testBoard",
-    "cal": "node calibrate"
+    "firmTest": "node calibration/testBoard",
+    "fun": "node examples/catbot",
+    "cal": "node calibration/calibrate"
   },
   "keywords": [],
   "author": "",

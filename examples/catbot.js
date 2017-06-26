@@ -9,4 +9,10 @@ catbot(function (err, hardware) {
   hardware.to([90, 130]) // center x, ant point y to the top
   hardware.laser.blink() // blinks laser blink
   hardware.x.sweep() // let's dance!
+  setTimeout(function () {
+    hardware.x.stop()
+    hardware.to([90, 90])
+    hardware.laser.stop()
+    hardware.laser.on()
+  }, 5000)
 })
