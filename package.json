@@ -22,7 +22,8 @@
     "inquirer": "^2.0.0",
     "johnny-five": "^0.10.6",
     "rc": "^1.1.6",
-    "serialport": "^4.0.7"
+    "serialport": "^4.0.7",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^3.12.2",

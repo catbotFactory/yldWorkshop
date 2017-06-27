@@ -1,22 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Gist
- @gorhgorh
- Sign out
- Unwatch 17
-  Unstar 25
- Fork 5 tableflip/lasercat-workshop
- Code  Issues 2  Pull requests 1  Projects 0  Wiki  Settings Insights 
-Branch: master Find file Copy pathlasercat-workshop/exercises/let_me_entertain_your_cat/solution/solution.html
-51ac123  a day ago
-@gorhgorh gorhgorh fix deps for newer node versions
-2 contributors @gorhgorh @achingbrain
-RawBlameHistory     
-58 lines (54 sloc)  1.35 KB
 <!doctype html>
 <html>
   <head>
@@ -57,6 +38,8 @@ RawBlameHistory
         console.log('connected')
       })
       main.mousemove(function (e) {
+        // coordinates of the mouse position from the #main div
+        console.log(e.offsetX, e.offsetY)
         // emit event on mouse move
       })
       function map (n, fromLow, fromHigh, toLow, toHigh) {
