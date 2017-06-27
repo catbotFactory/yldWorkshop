@@ -1,0 +1,68 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Gist
+ @gorhgorh
+ Sign out
+ Unwatch 17
+  Unstar 25
+ Fork 5 tableflip/lasercat-workshop
+ Code  Issues 2  Pull requests 1  Projects 0  Wiki  Settings Insights 
+Branch: master Find file Copy pathlasercat-workshop/exercises/let_me_entertain_your_cat/solution/solution.html
+51ac123  a day ago
+@gorhgorh gorhgorh fix deps for newer node versions
+2 contributors @gorhgorh @achingbrain
+RawBlameHistory     
+58 lines (54 sloc)  1.35 KB
+<!doctype html>
+<html>
+  <head>
+    <title>LaserCat</title>
+    <style>
+    div#main {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: #ccc;
+      width: 500px;
+      height: 500px;
+      margin: -250px 0 0 -250px;
+    }
+    div#marker {
+      position: absolute;
+      top: 250px;
+      left: 250px;
+      background: #911;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin: -4px 0 0 -4px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="main"></div>
+    <div id="marker"></div>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://localhost:9582/socket.io/socket.io.js"></script>
+    <script>
+    (function () {
+      var main = $("#main")
+      var marker = $("#marker")
+      var socket = io("http://localhost:9582")
+      socket.on('connect', function(s) {
+        console.log('connected')
+      })
+      main.mousemove(function (e) {
+        // emit event on mouse move
+      })
+      function map (n, fromLow, fromHigh, toLow, toHigh) {
+        return (n - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow
+      }
+    })()
+    </script>
+  </body>
+</html>

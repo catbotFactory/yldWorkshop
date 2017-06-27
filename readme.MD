@@ -24,4 +24,11 @@ once you are done you can start the workshop exercises, more information [here][
 
 you can do the exercises in this reposistory, in the example dir, you have the file 01.js that contain the boilerplate code for the workshopper first exercise.
 
+
+if you have problem for the two last exercises, there is some boilerplate code in the socketIoExample dir, but it spoils lots of fun and things to learn, use with precaution.
+
+# TL:DR You are impatient and want to test the bot
+
+```npm run fun```
+
 [1]:http://yld.lesnodebots.eu/catbot/lasercat/
