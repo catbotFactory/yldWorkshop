@@ -7,11 +7,13 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      background: #ccc;
+      background: rgba(255,255,255,.2);
       width: 500px;
       height: 500px;
       margin: -250px 0 0 -250px;
+      cursor: none;
     }
+
     div#marker {
       position: absolute;
       top: 250px;
@@ -21,6 +23,15 @@
       height: 8px;
       border-radius: 50%;
       margin: -4px 0 0 -4px;
+      cursor: none;
+    }
+    body{
+      background: url('http://www.clker.com/cliparts/6/6/b/5/13588568351933136110nyan_cat.png') no-repeat center center fixed;
+      
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
     }
     </style>
   </head>
@@ -40,6 +51,8 @@
       main.mousemove(function (e) {
         // coordinates of the mouse position from the #main div
         console.log(e.offsetX, e.offsetY)
+        console.log(e)
+        marker.css({left: e.clientX, top: e.clientY})
         // emit event on mouse move
       })
       function map (n, fromLow, fromHigh, toLow, toHigh) {
