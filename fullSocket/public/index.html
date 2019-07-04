@@ -50,10 +50,16 @@
       })
       main.mousemove(function (e) {
         // coordinates of the mouse position from the #main div
-        console.log(e.offsetX, e.offsetY)
+
+        var x = Math.floor(map(e.offsetX, 0, 500, 180, 0))
+        var y = Math.floor(map(e.offsetY, 0, 500, 0, 180))
+        if (x < 1) x = 0
+        if (y < 1) y = 0
+        console.log(x, y )
         marker.css({left: e.clientX, top: e.clientY})
-        
         // emit event on mouse move
+        socket.emit("x", x)
+        socket.emit("y", y)
       })
       function map (n, fromLow, fromHigh, toLow, toHigh) {
         return (n - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow
